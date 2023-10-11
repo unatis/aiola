@@ -84,7 +84,7 @@ public class Sanity {
 
         transactionsPage.verifySingleTransactionDetails(100, TransactionsPage.TransactionType.DEBIT);
 
-        //data driven verification
+        //data driven verification example
         transactionsPage.verifyCollectionTransactionsDetails(System.getProperty("user.dir") + "\\src\\test\\java\\DDT\\expectedTableDataCollection.json");
 
     }

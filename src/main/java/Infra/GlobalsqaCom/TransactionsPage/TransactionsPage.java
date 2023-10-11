@@ -77,7 +77,18 @@ public class TransactionsPage {
     public void verifySingleTransactionDetails(Integer amount, TransactionType tType) {
         try {
 
+            String trType = "";
+
             boolean flgDateFound = false, flgAmountFound = false, flgTypeEquals = false;
+
+            if(tType == TransactionType.CREDIT) {
+
+                trType = "credit";
+
+            }else if(tType == TransactionType.DEBIT){
+
+                trType = "debit";
+            }
 
             WebElement table = common.getDriverWait().until(ExpectedConditions.visibilityOf((transactionTable)));
 
@@ -91,22 +102,18 @@ public class TransactionsPage {
 
                     flgAmountFound = true;
 
-                    if(regexDataFormatVerification(columns.get(0).getText())) {
-
-                        flgDateFound = true;
-                    }
-
-                    if(columns.get(2).getText().trim().toLowerCase().equals("credit") && tType == TransactionType.CREDIT) {
+                    if(columns.get(2).getText().trim().toLowerCase().equals(trType)) {
 
                         flgTypeEquals = true;
 
-                    }else if(columns.get(2).getText().trim().toLowerCase().equals("debit") && tType == TransactionType.DEBIT){
+                        if(regexDataFormatVerification(columns.get(0).getText())) {
 
-                        flgTypeEquals = true;
+                            flgDateFound = true;
+                        }
+
+                        break;
+
                     }
-
-                    break;
-
                 }
 
             }
