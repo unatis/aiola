@@ -10,14 +10,11 @@ import org.junit.jupiter.api.*;
 
 
 public class Sanity {
-    private static String startURL = "";
     private static Common common = null;
 
     //To run test - mvn clean test -Dtest=Suites.Sanity
     @BeforeAll
     public static void setup(){
-
-        startURL = Config.getProperty("start.url");
 
         common = new Common();
     }
@@ -31,7 +28,7 @@ public class Sanity {
     @Test
     void transactionsHistoryListPositive(){
 
-        common.NavigateTo(startURL);
+        common.NavigateTo(Config.getProperty("start.url"));
 
         LoginPage loginPage = new Infra.GlobalsqaCom.LoginPage.LoginPage(common);
 
